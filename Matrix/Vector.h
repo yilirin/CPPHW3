@@ -1,14 +1,1 @@
-//
-//  Vector.h
-//  Matrix
-//
-//  Created by 范志方 on 15/11/12.
-//  Copyright © 2015年 范志方. All rights reserved.
-//
-
-#ifndef Vector_h
-#define Vector_h
-
-#include <stdio.h>
-
-#endif /* Vector_h */
+//  Vector.h//  Matrix////  Created by 范志方 on 15/11/12.//  Copyright © 2015年 范志方. All rights reserved.//#ifndef Vector_h#define Vector_h#define T double#define Rank int#include <iostream>class Vector{    Rank _size;    T *data;public:    static Vector INVALID_VECTOR;    Vector():_size(1){//默认构造        data = new T[_size];        for (int i = 0; i < _size; i++) {            data[i] = 0;        }    }    Vector(Rank _size ,T * rhs):_size(_size){//针对数组的构造        data = new T[_size];        for (int i = 0; i < _size; i++) {            data[i] = rhs[i];        }            }    Vector(Rank _size,T _num):_size(_size){//针对数值的构造        data = new T[_size];        for (int i = 0; i < _size; i++) {            data[i] = _num;        }    }    Vector(const Vector& rhs){//拷贝构造函数,necessary！！        _size = rhs._size;        data = new T[_size];        for (int i = 0; i < _size; ++i) {            data[i] = rhs.data[i];        }    }    ~Vector(){        delete []data;    }    Rank size()const;    T& operator[](Rank)const;    bool operator==(const Vector &rhs)const;    bool operator!=(const Vector &rhs);    Vector operator+(const Vector &rhs);    Vector operator+(T num);    Vector operator-()const;    Vector operator-(Vector &rhs);    Vector operator-(T num);    Vector operator*(T num);    Vector& operator=(T num);    Vector& operator=(const Vector &rhs);    void printVector(){        for (int i = 0; i < _size; ++i) {            std::cout << data[i] << ' ';        }        std::cout << std::endl;    }    friend class Matrix;};#endif /* Vector_h */
